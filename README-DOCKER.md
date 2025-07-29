@@ -42,6 +42,7 @@ docker logs -f react-learning-lab
 ## 🌐 Acceso a la Aplicación
 
 Una vez desplegada, la aplicación estará disponible en:
+
 - **Local**: http://localhost:3000
 - **Health Check**: http://localhost:3000/health
 
@@ -71,6 +72,7 @@ environment:
 ### Configuración de nginx
 
 El archivo `nginx.conf` incluye:
+
 - ✅ Compresión gzip
 - ✅ Cacheo de archivos estáticos
 - ✅ Configuración SPA (React Router)
@@ -83,7 +85,7 @@ Por defecto, la aplicación se expone en el puerto 3000, pero puedes cambiarlo e
 
 ```yaml
 ports:
-  - "8080:80"  # Cambiar a puerto 8080
+  - "8080:80" # Cambiar a puerto 8080
 ```
 
 ## 🔧 Comandos Útiles
@@ -122,6 +124,7 @@ curl http://localhost:3000/health
 ## 🛠️ Troubleshooting
 
 ### Problema: Puerto ya en uso
+
 ```bash
 # Encontrar qué proceso usa el puerto
 lsof -i :3000
@@ -132,6 +135,7 @@ ports:
 ```
 
 ### Problema: Build falla
+
 ```bash
 # Limpiar cache de Docker
 docker builder prune -f
@@ -141,6 +145,7 @@ docker-compose build --no-cache
 ```
 
 ### Problema: Aplicación no carga
+
 ```bash
 # Verificar que nginx está corriendo
 docker exec react-learning-lab nginx -t
@@ -154,6 +159,7 @@ docker logs react-learning-lab
 Para producción, considera:
 
 1. **Usar un registry de Docker**:
+
 ```bash
 # Tag para registry
 docker tag react-learning-lab your-registry.com/react-learning-lab:v1.0.0
@@ -163,6 +169,7 @@ docker push your-registry.com/react-learning-lab:v1.0.0
 ```
 
 2. **Configurar HTTPS**:
+
 ```yaml
 # Agregar SSL con traefik o nginx-proxy
 labels:
@@ -170,6 +177,7 @@ labels:
 ```
 
 3. **Configurar dominio personalizado**:
+
 ```yaml
 labels:
   - "traefik.http.routers.react-app.rule=Host(`tu-dominio.com`)"
@@ -178,6 +186,7 @@ labels:
 ## 📈 Optimizaciones
 
 El Dockerfile incluye:
+
 - ✅ Multi-stage build (reduce tamaño de imagen)
 - ✅ Alpine Linux (imagen ligera)
 - ✅ Caching de dependencias npm
@@ -189,6 +198,7 @@ El Dockerfile incluye:
 ## 🎓 Para Estudiantes
 
 Esta aplicación es perfecta para:
+
 - Aprender conceptos de React en un entorno aislado
 - Demostraciones en clase sin configuración local
 - Prácticas de despliegue con Docker
