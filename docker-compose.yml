@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  react-learning-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react-learning-lab
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.react-app.rule=Host(`localhost`)"
+      - "traefik.http.services.react-app.loadbalancer.server.port=80"
+
+networks:
+  default:
+    name: react-learning-network
